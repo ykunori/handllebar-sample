@@ -1,0 +1,88 @@
+body {
+    font:15px arial,sans-serif;
+}
+h1 {
+    margin: 0 0 10px 0;
+    padding: 5px;
+    font-size: 24px;
+    background-color: #999;
+    color: #fff;
+}
+p {
+  margin: 0;
+}
+table {
+    margin: 10px;
+}
+th, td {
+    padding: 5px;
+    border: 1px solid #999;
+}
+th {
+    background: #ccc;
+}
+tr:nth-child(odd) {
+    background: #eee;
+}
+td a {
+    color: #000;
+    text-decoration: underline;
+}
+a {
+  text-decoration: none;
+}
+* {
+  box-sizing: border-box;
+}
+.cardWrap {
+  overflow: hidden;
+}
+.card {
+  box-shadow: 0 1px 1px #777;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 0 5px 10px 5px;
+  width: 49%;
+  float: left;
+  display: block;
+  position: relative;
+}
+
+.prof {
+  display: -webkit-box;
+}
+.prof-img {
+  -webkit-box-align: center;
+}
+.prof-name {
+  -webkit-box-align: center;
+  -webkit-box-flex: 1;
+  padding-left: 10px;
+}
+.flag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #aaa;
+  background: rgba(255,0,0,0.5);
+}
+.post-time {
+  color: #ccc;
+  font-size: 12px;
+}
+
+.card:nth-child(2n+1) {
+  clear: left;
+}
+.card:nth-child(2n) {
+  clear: right;
+}
+.isthere {
+  font-size: 15px;
+}
+.nothere {
+  font-size: 13px;
+  color: #555;
+}

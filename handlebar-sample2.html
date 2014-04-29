@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+
+<script src="js/handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+<body>
+
+<script id="input" type="text/x-handlebars-template">
+<section class="inner">
+  <h1 class="header">{{title}}</h1>
+  <div class="box">
+    <img src="{{img.url}}" alt="{{img.alt}}" />
+    <p class="flex">{{text}}</p>
+  </div>
+</section>
+</script>
+<div id="output"></div>
+
+
+
+
+<script>
+var values = {
+  title: 'Hello Handlebars!',
+  img: {
+    url: 'http://example.com',
+    alt: 'Something..'
+  },
+  text: 'My first Handlebars!'
+},
+template = Handlebars.compile($('#input').html());
+
+$('#output').html(template(values));
+</script>
+
+<div class="cardWrap">
+  <div class="card">
+    <div class="prof">
+      <p class="prof-img"><img src="#" width="100" height="50" alt="ssss"></p>
+      <p class="prof-name">hogehogehogoe</p>
+    </div>
+    <p class="content">contentnt</p>
+  </div>
+
+  <div class="card">
+    <div class="prof">
+      <p class="prof-img"><img src="#" width="100" height="50" alt="ssss"></p>
+      <p class="prof-name">hogehogehogoe</p>
+    </div>
+    <p class="content">contentnt</p>
+  </div>
+
+  <div class="card">
+    <div class="prof">
+      <p class="prof-img"><img src="#" width="100" height="50" alt="ssss"></p>
+      <p class="prof-name">hogehogehogoe</p>
+    </div>
+    <p class="content">contentnt</p>
+  </div>
+
+  <div class="card">
+    <div class="prof">
+      <p class="prof-img"><img src="#" width="100" height="50" alt="ssss"></p>
+      <p class="prof-name">hogehogehogoe</p>
+    </div>
+    <p class="content">contentnt</p>
+  </div>
+</div>
+
+<p>上がひな形</p>
+
+<hr>
+
+<section class="card-handlebar">
+  <div class="handlebar_cardWrap"></div>
+
+<script id="handlebar-cards" type="text/x-handlebars-template">
+{{#each cards}}
+  <a href="{{card_url}}" class="card">
+    <div class="prof">
+    <p class="prof-img"><img src="{{user_pic_url}}" width="100" height="50" alt="{{user_pic_alt}}"></p>
+    <p class="prof-name">{{user_name}}さん</p>
+    </div>
+    <p class="content">{{post}}</p>
+    <p class="post-time">{{user_name}}さんは、{{post_times}}回投稿しています。{{#showCondition post_times}}{{/showCondition}} </p>
+    {{#if flag}}
+    <p class="flag"></p>
+    {{/if}}
+    {{#isGreaterThanZero user_pic_url}}
+    <p class="isthere">画像URLがあるよ</p>
+    {{else}}
+    <p class="nothere">画像URLはないよ</p>
+    {{/isGreaterThanZero}}
+    </p>
+  </a>
+  {{/each}}
+</script>
+
+<script>
+var values = {
+  cards: [
+    {
+      card_url: 'http:\/\/yahoo.co.jp',
+      user_pic_url: 'http:\/\/placehold.jp\/640x340.png',
+      user_pic_alt: 'Aの画像',
+      user_name: 'A',
+      post: 'I\'m A',
+      post_times: 5,
+      flag: true
+    },
+    {
+      card_url: 'http:\/\/google.co.jp',
+      user_pic_url: 'http:\/\/placehold.jp\/420x240.png',
+      user_pic_alt: 'Bの画像',
+      user_name: 'B',
+      post: 'I\'m B',
+      post_times: 10,
+      flag: false
+    },
+    {
+      card_url: 'http:\/\/nifty.co.jp',
+      user_pic_url: '',
+      user_pic_alt: 'Cの画像',
+      user_name: 'C',
+      post: 'I\'m C',
+      post_times: -1,
+      flag: true
+    },
+    {
+      card_url: 'http:\/\/youtube.co.jp',
+      user_pic_url: 'http:\/\/placehold.jp\/160x100.png',
+      user_pic_alt: 'Dの画像',
+      user_name: 'D',
+      post: 'I\'m D',
+      post_times: 0,
+      flag: true
+    },
+    {
+      card_url: 'http:\/\/sample.co.jp',
+      user_pic_url: 'http:\/\/placehold.jp\/110x130.png',
+      user_pic_alt: 'Eの画像',
+      user_name: 'E',
+      post: 'I\'m E',
+      post_times: 8,
+      flag: true
+    },
+    {
+      card_url: 'http:\/\/samplef.co.jp',
+      user_pic_url: 'http:\/\/placehold.jp\/130x130.png',
+      user_pic_alt: 'Fの画像',
+      user_name: 'F',
+      post: 'I\'m F',
+      post_times: 12,
+      flag: false
+    }
+  ]
+},template = Handlebars.compile($('#handlebar-cards').html());
+
+Handlebars.registerHelper('showCondition', function(cond, opt) {
+  var condition = '';
+  if(cond  ==  0) {
+    condition = '投稿してください！';
+  } else if(0 < cond && cond < 10) {
+    condition = 'レベルアップまで' + (10 - cond) + '回です';
+  } else if(cond >= 10){
+    condition = 'もうレベルマックスです。';
+  } else {
+    condition = '数値エラーだよ';
+  }
+  return condition;
+});
+
+Handlebars.registerHelper('isGreaterThanZero', function(cond, opt) {
+console.log("d");
+  if(cond) {
+    return opt.fn(this); // まだ戦えるよ！　のこと
+  } else {
+    return opt.inverse(this); // HPがやばい！　のこと
+  }
+});
+
+$('.handlebar_cardWrap').html(template(values));
+</script>
+
+<div class="handlebar_cardWrap"></div>
+
+</section>
+</body>
+</html>
